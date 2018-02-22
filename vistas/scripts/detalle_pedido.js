@@ -11,10 +11,11 @@ function init(){
 }
 
 function limpiar(){
-	$("#id_gas").val("");
-	$("#descripcion_gas").val("");
-	$("#kilos").val("");
-	$("#valor").val("");
+	$("#id_detalle_pedido").val("");
+	$("#cantidad").val("");
+	$("#precio_total_pedido").val("");
+	$("#pedido_id_pedido").val("");
+	$("#gas_id_gas").val("");
 }
 
 function mostrarform(flag){
@@ -23,11 +24,9 @@ function mostrarform(flag){
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
 		$("#btnGuardar").prop("disabled", false);
-		$("#btnAgregar").hide();
 	}else{
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
-		$("#btnAgregar").show();
 	}
 }
 
@@ -50,7 +49,7 @@ function listar(){
 		],
 		"ajax":
 				{
-					url:'../ajax/gas.php?op=listar',
+					url:'../ajax/detalle_pedido.php?op=listar',
 					type: "get",
 					dataType: "json",
 					error: function(e){
@@ -68,7 +67,7 @@ function guardaryeditar(e){
 	$("#btnGuardar").prop("disabled", true);
 	var formData = new FormData($("#formulario")[0]);
 	$.ajax({
-		url:"../ajax/gas.php?op=guardaryeditar",
+		url:"../ajax/detalle_pedido.php?op=guardaryeditar",
 		type: "POST",
 		data: formData,
 		contentType: false,
@@ -86,15 +85,14 @@ function guardaryeditar(e){
 	limpiar();
 
 }
-
-function mostrar(id_gas){
-	$.post("../ajax/gas.php?op=mostrar",{id_gas : id_gas}, function(data, status){
+function mostrar(id_detalle_pedido){
+	$.post("../ajax/detalle_pedido.php?op=mostrar",{id_detalle_pedido : id_detalle_pedido}, function(data, status){
 		data = JSON.parse(data);
 		mostrarform(true);
-		$("#descripcion_gas").val(data.descripcion_gas);
-		$("#kilos").val(data.kilos);
-		$("#valor").val(data.valor);
-		$("#id_gas").val(data.id_gas);
+		$("#cantidad").val(data.cantidad);
+		$("#precio_total_pedido").val(data.precio_total_pedido);
+		$("#pedido_id_pedido").val(data.pedido_id_pedido);
+		$("#gas_id_gas").val(data.gas_id_gas);
 	})
 }
 

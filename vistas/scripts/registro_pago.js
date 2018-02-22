@@ -11,10 +11,10 @@ function init(){
 }
 
 function limpiar(){
-	$("#id_gas").val("");
-	$("#descripcion_gas").val("");
-	$("#kilos").val("");
-	$("#valor").val("");
+	$("#id_registro_pago").val("");
+	$("#comprobante_pago").val("");
+	$("#num_comprobante").val("");
+	$("#pedido_id_pedido").val("");
 }
 
 function mostrarform(flag){
@@ -23,11 +23,9 @@ function mostrarform(flag){
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
 		$("#btnGuardar").prop("disabled", false);
-		$("#btnAgregar").hide();
 	}else{
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
-		$("#btnAgregar").show();
 	}
 }
 
@@ -50,7 +48,7 @@ function listar(){
 		],
 		"ajax":
 				{
-					url:'../ajax/gas.php?op=listar',
+					url:'../ajax/registro_pago.php?op=listar',
 					type: "get",
 					dataType: "json",
 					error: function(e){
@@ -68,7 +66,7 @@ function guardaryeditar(e){
 	$("#btnGuardar").prop("disabled", true);
 	var formData = new FormData($("#formulario")[0]);
 	$.ajax({
-		url:"../ajax/gas.php?op=guardaryeditar",
+		url:"../ajax/registro_pago.php?op=guardaryeditar",
 		type: "POST",
 		data: formData,
 		contentType: false,
@@ -86,15 +84,15 @@ function guardaryeditar(e){
 	limpiar();
 
 }
-
-function mostrar(id_gas){
-	$.post("../ajax/gas.php?op=mostrar",{id_gas : id_gas}, function(data, status){
+$id_registro_pago, $comprobante_pago, $num_comprobante, $pedido_id_pedido
+function mostrar(id_registro_pago){
+	$.post("../ajax/registro_pago.php?op=mostrar",{id_registro_pago : id_registro_pago}, function(data, status){
 		data = JSON.parse(data);
 		mostrarform(true);
-		$("#descripcion_gas").val(data.descripcion_gas);
-		$("#kilos").val(data.kilos);
-		$("#valor").val(data.valor);
-		$("#id_gas").val(data.id_gas);
+		$("#comprobante_pago").val(data.comprobante_pago);
+		$("#num_comprobante").val(data.num_comprobante);
+		$("#pedido_id_pedido").val(data.pedido_id_pedido);
+		$("#id_registro_pago").val(data.id_registro_pago);
 	})
 }
 

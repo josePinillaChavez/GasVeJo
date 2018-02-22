@@ -8,13 +8,22 @@ function init(){
 		guardaryeditar(e);
 	})
 
+	$.post("../ajax/pedido.php?op=selectGas", function(r){
+		$("#gas_id_gas").html(r);
+		$("#gas_id_gas").selectpicker('refresh');
+	});
+
 }
 
 function limpiar(){
-	$("#id_gas").val("");
-	$("#descripcion_gas").val("");
-	$("#kilos").val("");
-	$("#valor").val("");
+	$("#id_pedido").val("");
+	$("#cantidad").val("");
+	$("#total_pedido").val("");
+	$("#total_kilos_pedidos").val("");
+	$("#estado").val("");
+	$("#usuario_id_usuario").val("");
+	$("#gas_id_gas").val("");
+
 }
 
 function mostrarform(flag){
@@ -50,7 +59,7 @@ function listar(){
 		],
 		"ajax":
 				{
-					url:'../ajax/gas.php?op=listar',
+					url:'../ajax/pedido.php?op=listar',
 					type: "get",
 					dataType: "json",
 					error: function(e){
@@ -68,7 +77,7 @@ function guardaryeditar(e){
 	$("#btnGuardar").prop("disabled", true);
 	var formData = new FormData($("#formulario")[0]);
 	$.ajax({
-		url:"../ajax/gas.php?op=guardaryeditar",
+		url:"../ajax/pedido.php?op=guardaryeditar",
 		type: "POST",
 		data: formData,
 		contentType: false,
@@ -87,16 +96,42 @@ function guardaryeditar(e){
 
 }
 
-function mostrar(id_gas){
-	$.post("../ajax/gas.php?op=mostrar",{id_gas : id_gas}, function(data, status){
+
+function mostrar(id_pedido){
+	$.post("../ajax/pedido.php?op=mostrar",{id_pedido : id_pedido}, function(data, status){
 		data = JSON.parse(data);
 		mostrarform(true);
-		$("#descripcion_gas").val(data.descripcion_gas);
-		$("#kilos").val(data.kilos);
-		$("#valor").val(data.valor);
-		$("#id_gas").val(data.id_gas);
+		$("#gas_id_gas").val(data.gas_id_gas);
+		$("#gas_id_gas").selectpicker('refresh');
+		$("#cantidad").val(data.cantidad);
+		$("#total_pedido").val(data.total_pedido);
+		$("#total_kilos_pedidos").val(data.total_kilos_pedidos);
+		$("#estado").val(data.estado);
+		$("#usuario_id_usuario").val(data.usuario_id_usuario);
+		$("#id_pedido").val(data.id_pedido);
 	})
 }
 
+function desactivar(id_pedido){
+	bootbox.confirm("¿Esta seguro de desactivar pedido?", function(resultado){
+		if(resultado){
+			$.post("../ajax/pedido.php?op=desactivar", {id_pedido : id_pedido}, function(e){
+				bootbox.alert(e);
+				tabla.ajax.reload();
+			});
+		}
+	})
+}
+
+function activar(id_pedido){
+	bootbox.confirm("¿Esta seguro de activar pedido?",function(resultado){
+		if(resultado){
+			$.post("../ajax/pedido.php?op=activar", {id_pedido : id_pedido}, function(e){
+				bootbox.alert(e);
+				tabla.ajax.reload();
+			});
+		}
+	})
+}
 
 init();

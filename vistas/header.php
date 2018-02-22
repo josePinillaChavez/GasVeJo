@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ITVentas | www.incanatoit.com</title>
+    <title>Pedido Gas</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -17,11 +17,13 @@
     <link rel="stylesheet" href="../public/css/_all-skins.min.css">
     <link rel="apple-touch-icon" href="../public/img/apple-touch-icon.png">
     <link rel="shortcut icon" href="../public/img/favicon.ico">
-    <!--datatabe-->
-    <link rel="stylesheet" href="../public/datatables/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="../public/datatables/buttons.dataTables.min.css">
-    <link rel="stylesheet" href="../public/datatables/responsive.dataTables.min.css">
-    <script src="../public/css/bootstrap-select.min.css"></script>
+
+    <!--DATATABLES -->
+    <link rel="stylesheet" type="text/css" href="../public/datatables/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../public/datatables/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../public/datatables/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/bootstrap-select.min.css">
+      
 
   </head>
   <body class="hold-transition skin-blue-light sidebar-mini">
@@ -34,7 +36,7 @@
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>IT</b>Ventas</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>ITVentas</b></span>
+          <span class="logo-lg"><img src="../public/dist/img/logo-anercich21.png" style="width: 215px" alt=""></span>
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->
@@ -52,16 +54,13 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="../public/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Jose Ignacio Pinilla Chavez Morales Pino</span>
+                  <span class="hidden-xs">Veronica Carolina Morales Pino</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <img src="../public/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                    <p>
-                      www.incanatoit.com - Desarrollando Software
-                      <small>www.youtube.com/jcarlosad7</small>
-                    </p>
+                   
                   </li>
                   
                   <!-- Menu Footer-->
