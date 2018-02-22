@@ -4,21 +4,12 @@ function init(){
 	mostrarform(false);
 	listar();
 
-	$("#formulario").on("submit", function(e){
-		guardaryeditar(e);
-	})
 
 }
 
-function limpiar(){
-	$("#id_gas").val("");
-	$("#descripcion_gas").val("");
-	$("#kilos").val("");
-	$("#valor").val("");
-}
 
 function mostrarform(flag){
-	limpiar();
+
 	if (flag) {
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
@@ -26,13 +17,12 @@ function mostrarform(flag){
 	}else{
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
+		$("#btnAgregar").hide();
+		
 	}
 }
 
-function cancelarform(){
-	limpiar();
-	mostrarform(false);
-}
+
 
 function listar(){
 	tabla = $('#tbllistado').dataTable(
@@ -48,7 +38,7 @@ function listar(){
 		],
 		"ajax":
 				{
-					url:'../ajax/gas.php?op=listar',
+					url:'../ajax/tipo_permiso.php?op=listar',
 					type: "get",
 					dataType: "json",
 					error: function(e){
@@ -61,40 +51,7 @@ function listar(){
 	}).DataTable();
 }
 
-function guardaryeditar(e){
-	e.preventDefault();//no se activara la funcion predeterminada del evento
-	$("#btnGuardar").prop("disabled", true);
-	var formData = new FormData($("#formulario")[0]);
-	$.ajax({
-		url:"../ajax/gas.php?op=guardaryeditar",
-		type: "POST",
-		data: formData,
-		contentType: false,
-		processData: false,
 
-		success: function(datos){
-			bootbox.alert(datos);
-			mostrarform(false);
-			tabla.ajax.reload();
-		}
-
-
-
-	});
-	limpiar();
-
-}
-
-function mostrar(id_gas){
-	$.post("../ajax/gas.php?op=mostrar",{id_gas : id_gas}, function(data, status){
-		data = JSON.parse(data);
-		mostrarform(true);
-		$("#descripcion_gas").val(data.descripcion_gas);
-		$("#kilos").val(data.kilos);
-		$("#valor").val(data.valor);
-		$("#id_gas").val(data.id_gas);
-	})
-}
 
 
 init();

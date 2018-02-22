@@ -37,6 +37,16 @@ switch ($_GET["op"]) {
 		echo json_encode($respuesta);
 		break;
 
+		  case 'desactivar':
+            $respuesta=$usuario->desactivarUsuario($id_usuario);
+            echo $respuesta ? "desactivado con exito":"no se pudo descativar";  
+
+        break;
+    case 'activar':
+            $respuesta=$usuario->activarUsuario($id_usuario);
+            echo $respuesta ? "Usuario con exito":"no se pudo activar";
+        break;
+
 	case 'listar':
 		$respuesta=$usuario->listarUsuario();
 		//array
@@ -44,7 +54,10 @@ switch ($_GET["op"]) {
 
 		while ($reg=$respuesta->fetch_object()){
 			$data[] = array(
-				"0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->id_usuario.')"><i class="fa fa-pencil"></i></button>',
+				  "0"=>($reg->condicion)?'<butonn class="btn btn-warning" onclick="mostrar('.$reg->id_usuario.')"><i class="fa fa-pencil"></i></butonn>'.
+                    ' <butonn class="btn btn-danger" onclick="desactivar('.$reg->id_usuario.')"><i class="fa fa-close"></i></butonn>':
+                    '<butonn class="btn btn-warning" onclick="mostrar('.$reg->id_usuario.')"><i class="fa fa-pencil"></i></butonn>'.
+                    ' <butonn class="btn btn-info" onclick="ativar('.$reg->id_usuario.')"><i class="fa fa-check"></i></butonn>',
 				"1"=>$reg->login,
 				"2"=>$reg->clave,
 				"3"=>"<img src='../files/usuarios/".$reg->imagen."' height='50px' width='50px'>",

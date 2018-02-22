@@ -6,16 +6,15 @@ Class Gas{
 
 	}
 
-	public function insertarGas($descripcion_gas, $kilos, $valor){
-		$sql = "INSERT INTO gas (descripcion_gas, kilos, valor)
-				VALUES ('$descripcion_gas', '$kilos', '$valor')";
+	public function insertarGas($descripcion_gas, $kilos, $valor,$imagen){
+		$sql = "INSERT INTO gas (descripcion_gas,kilos,valor,imagen)
+				VALUES ('$descripcion_gas','$kilos','$valor','$imagen')";
 		return ejecutarConsulta($sql);
 	}
 
-	public function editarGas($id_gas,$descripcion_gas, $kilos, $valor){
-		$sql = "UPDATE gas
-				SET descripcion_gas = '$descripcion_gas', kilos = '$kilos', valor = '$valor'
-				WHERE id_gas = '$id_gas'";
+	public function editarGas($id_gas,$descripcion_gas,$kilos,$valor,$imagen){
+		   $sql = "UPDATE gas SET descripcion_gas='$id_gas',kilos='$kilos',valor='$valor',imagen='$imagen'
+        WHERE id_gas='$id_gas'";
 		return ejecutarConsulta($sql);
 	}
 

@@ -15,6 +15,8 @@ function limpiar(){
 	$("#descripcion_gas").val("");
 	$("#kilos").val("");
 	$("#valor").val("");
+	$("#imagenmuestra").attr("src","");
+    $("#imagenactual").val("");
 }
 
 function mostrarform(flag){
@@ -23,11 +25,11 @@ function mostrarform(flag){
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
 		$("#btnGuardar").prop("disabled", false);
-		$("#btnAgregar").hide();
+		//$("#btnAgregar").hide();
 	}else{
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
-		$("#btnAgregar").show();
+		//$("#btnAgregar").show();
 	}
 }
 
@@ -95,6 +97,9 @@ function mostrar(id_gas){
 		$("#kilos").val(data.kilos);
 		$("#valor").val(data.valor);
 		$("#id_gas").val(data.id_gas);
+		$("#imagenmuestra").show();
+        $("#imagenmuestra").attr("src", "../files/gas/"+data.imagen);
+        $("#imagenactual").val(data.imagen);  
 	})
 }
 

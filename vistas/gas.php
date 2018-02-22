@@ -24,6 +24,7 @@ require 'header.php';
                             <th>Descripcion</th>
                             <th>kilos</th>
                             <th>Valor</th>
+                                <th>imagen </th>
                           </thead>
                           <tbody>
                           </tbody>
@@ -32,6 +33,7 @@ require 'header.php';
                             <th>Descripcion</th>
                             <th>kilos</th>
                             <th>Valor</th>
+                                <th>imagen </th>
                           </tfoot>
                         </table>
                     </div>
@@ -49,6 +51,14 @@ require 'header.php';
                         <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                           <label>Valor:</label>
                           <input type="text" class="form-control" name="valor" id="valor" maxlength="11" placeholder="Ingrese valor" required>
+                        </div>
+
+                        <div class="form-group col-md-6 col-lg-6 col-sm-6 col-xs-12" >
+                             
+                             <label >imagen :</label>
+                             <input type="file" name="imagen" class="form-control" id="imagen">
+                             <input type="hidden" name="imagenactual" id="imagenactual">
+                             <img src="" width="150px" height="120px" id="imagenmuestra">
                         </div>
                         <div class="for-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
