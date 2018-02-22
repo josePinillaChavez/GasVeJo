@@ -1,4 +1,6 @@
 <?php 
+
+//prueba edoitada
 require_once "../modelos/Detalle_pedido.php";
 
 $detalle_pedido = new Detalle_pedido();
