@@ -27,17 +27,17 @@ function limpiar(){
 function mostrarFormulario(flag){
     limpiar();
     if (flag) {
-        $("#listadoRegistros").hide();
-        $("#formularioregistros").show();       
+        $("#listadoregistros").hide();
+        $("#formulario").show();       
         $("#btnGuardar").prop("disabled",false);
     }
     else{
-        $("#listadoRegistros").show();
-        $("#formularioregistros").hide();
+        $("#listadoregistros").show();
+        $("#formulario").hide();
     }
 
 }
-function cancelarForm(){
+function cancelarform(){
     limpiar();
     mostrarFormulario(false);
 }
@@ -55,7 +55,7 @@ function listar(){
         ],
         "ajax":
         {
-            url: '../ajax/usurio.php?op=listar',
+            url: '../ajax/usuario.php?op=listar',
             type: "get",
             dataType: "json",
             error: function(e){
@@ -114,12 +114,12 @@ function editar(){
 
 }
 
-function mostrar(id_gas){
-    $.post("../ajax/usuario.php?op=mostrar", {id_gas: id_gas}, function(data, status) {
+function mostrar(id_usuario){
+    $.post("../ajax/usuario.php?op=mostrar", {id_usuario: id_usuario}, function(data, status) {
         data = JSON.parse(data);
         mostrarFormulario(true);
 
-        $("#id_usuario").val(data.id_gas);
+        $("#id_gas").val(data.id_gas);
         //$("#id_gas").selectpicker('refresh');
         $("#login").val(data.descripcion_gas);
         $("#clave").val(data.kilos);
@@ -133,5 +133,33 @@ function mostrar(id_gas){
 
 
 
+}
+
+function desactivar(id_usuario){
+    bootbox.confirm("¿Esta Seguro de desactivar la usuario?",function(result){
+        if (result) {
+            $.post("../ajax/usuario.php?op=desactivar", {id_usuario : id_usuario}, function(e){
+            bootbox.alert(e);
+            tabla.ajax.reload();
+
+
+            });
+         
+        }
+    })
+}
+
+
+function ativar(id_usuario){
+    bootbox.confirm("¿Esta Seguro de tivar la usuario?",function(result){
+        if (result) {
+            $.post("../ajax/usuario.php?op=activar", {id_usuario : id_usuario}, function(e){
+                   bootbox.alert(e);
+                   tabla.ajax.reload();
+
+            });
+         
+        }
+    })
 }
 init();

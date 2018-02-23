@@ -23,11 +23,15 @@ switch ($_GET["op"]) {
 			move_uploaded_file($_FILES["imagen"]["tmp_name"], "../files/usuarios/" . $imagen);
 		}
 	}
+		//Clave Encriptada
+
+	$clavehash=hash("SHA256", $clave);
+
 		if (empty($id_usuario)) {
-			$respuesta = $usuario->insertarUsuario($login, $clave, $imagen, $condicion);
+			$respuesta = $usuario->insertarUsuario($login, $clavehash, $imagen, $condicion);
 			echo $respuesta ? "Usuario registrado" : "Usuario no se pudo registrar";
 		}else{
-			$respuesta = $usuario->editarUsuario($id_usuario, $login, $clave, $imagen, $condicion);
+			$respuesta = $usuario->editarUsuario($id_usuario, $login, $clavehash, $imagen, $condicion);
 			echo $respuesta ? "Usuario actualizado" : "Usuario no se ha podido actualizar";
 		}
 		break;
@@ -54,14 +58,16 @@ switch ($_GET["op"]) {
 
 		while ($reg=$respuesta->fetch_object()){
 			$data[] = array(
+				
 				  "0"=>($reg->condicion)?'<butonn class="btn btn-warning" onclick="mostrar('.$reg->id_usuario.')"><i class="fa fa-pencil"></i></butonn>'.
                     ' <butonn class="btn btn-danger" onclick="desactivar('.$reg->id_usuario.')"><i class="fa fa-close"></i></butonn>':
                     '<butonn class="btn btn-warning" onclick="mostrar('.$reg->id_usuario.')"><i class="fa fa-pencil"></i></butonn>'.
                     ' <butonn class="btn btn-info" onclick="ativar('.$reg->id_usuario.')"><i class="fa fa-check"></i></butonn>',
+                // "0"=>$reg->id_usuario,   
 				"1"=>$reg->login,
 				"2"=>$reg->clave,
 				"3"=>"<img src='../files/usuarios/".$reg->imagen."' height='50px' width='50px'>",
-				"4"=>$reg->condicion,
+				"4"=>$reg->condicion
 			);
 		}
 		$resultados = array(
