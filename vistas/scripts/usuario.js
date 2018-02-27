@@ -1,7 +1,7 @@
 var tabla;
 
 function init(){
-mostrarFormulario(false);
+mostrarform(false);
 listar();
 
 $("#formulario").on("submit",function(e)
@@ -9,6 +9,10 @@ $("#formulario").on("submit",function(e)
     guardaryeditar(e);
 })
 $("#imagenmuestra").hide();
+
+$.post("../ajax/usuario.php?op=permisos",function(r){
+    $("#permisos").html(r);
+});
 
 }
 
@@ -24,7 +28,7 @@ function limpiar(){
     $("#imagenactual").val("");
 
 }
-function mostrarFormulario(flag){
+function mostrarform(flag){
     limpiar();
     if (flag) {
         $("#listadoregistros").hide();
@@ -37,9 +41,9 @@ function mostrarFormulario(flag){
     }
 
 }
-function cancelarform(){
+function cancelarForm(){
     limpiar();
-    mostrarFormulario(false);
+    mostrarform(false);
 }
 
 function listar(){
@@ -83,7 +87,7 @@ function guardaryeditar(e){
 
         success: function(datos){
             bootbox.alert(datos);
-            mostrarFormulario(false);
+            mostrarform(false);
             tabla.ajax.reload();
         }
 
@@ -114,12 +118,12 @@ function editar(){
 
 }
 
-function mostrar(id_usuario){
-    $.post("../ajax/usuario.php?op=mostrar", {id_usuario: id_usuario}, function(data, status) {
+function mostrar(id_gas){
+    $.post("../ajax/usuario.php?op=mostrar", {id_gas: id_gas}, function(data, status) {
         data = JSON.parse(data);
         mostrarFormulario(true);
 
-        $("#id_gas").val(data.id_gas);
+        $("#id_usuario").val(data.id_gas);
         //$("#id_gas").selectpicker('refresh');
         $("#login").val(data.descripcion_gas);
         $("#clave").val(data.kilos);
@@ -133,33 +137,5 @@ function mostrar(id_usuario){
 
 
 
-}
-
-function desactivar(id_usuario){
-    bootbox.confirm("¿Esta Seguro de desactivar la usuario?",function(result){
-        if (result) {
-            $.post("../ajax/usuario.php?op=desactivar", {id_usuario : id_usuario}, function(e){
-            bootbox.alert(e);
-            tabla.ajax.reload();
-
-
-            });
-         
-        }
-    })
-}
-
-
-function ativar(id_usuario){
-    bootbox.confirm("¿Esta Seguro de tivar la usuario?",function(result){
-        if (result) {
-            $.post("../ajax/usuario.php?op=activar", {id_usuario : id_usuario}, function(e){
-                   bootbox.alert(e);
-                   tabla.ajax.reload();
-
-            });
-         
-        }
-    })
 }
 init();

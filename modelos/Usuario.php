@@ -6,10 +6,23 @@ Class Usuario{
 
 	}
 
-	public function insertarUsuario($login, $clave, $imagen, $condicion){
+	public function insertarUsuario($login, $clave, $imagen, $condicion,$permisos){
 		$sql = "INSERT INTO usuario (login, clave, imagen, condicion)
 				VALUES ('$login', '$clave', '$imagen', '1')";
-		return ejecutarConsulta($sql);
+		
+		ejecutarConsulta_retornarID($sql);
+		$idusuarionew =ejecutarConsulta_retornarID($sql);
+		$num_elementos=0;
+		$sw=true;
+
+		while ($num_elementos < count($permisos)) {
+			$sql_detalle = "INSERT INTO usuario_permiso (permiso_id_permiso, usuario_id_usuario)
+				VALUES ('$permisos[$num_elementos]','$idusuarionew')";
+				ejecutarConsulta($sql_detalle) or $sw =false;
+			$num_elementos=$num_elementos+1;
+		}
+				//return ejecutarConsulta($sql);
+		return $sw;
 	}
 
 	public function editarUsuario($id_usuario, $login, $clave, $imagen, $condicion){
@@ -44,10 +57,21 @@ Class Usuario{
 			
 	return ejecutarConsulta($sql);
 	}
-	
+	public function listarmarcados($idusuario)
+	{
+		$sql="SELECT * FROM usuario_permiso WHERE usuario_id_usuario='$idusuario'";
+		return ejecutarConsulta($sql);
+	}
 
-
-
+	public function verificar($login,$clave){
+		$sql = "SELECT id_usuario,rut_soc,clave , condicion , nombre , imagen , telefono
+                FROM usuario u 
+                inner join socio s 
+                on u.id_usuario = s.usuario_id_usuario
+                where login='$login' and clave='$clave'";
+				
+		return ejecutarConsulta($sql);
+		}
 
 } 
 ?>

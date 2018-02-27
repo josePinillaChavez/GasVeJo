@@ -26,8 +26,8 @@ if (!function_exists('ejecutarConsulta')) {
 
 	function ejecutarConsulta_retornarID($sql){
 		global $conexion;
-		$query =$conexion->query($sql);
-		return $conexion ->insert_id;
+		$query = $conexion->query($sql);		
+		return $conexion->insert_id;	
 	}
 
 	function limpiarCadena($str){
